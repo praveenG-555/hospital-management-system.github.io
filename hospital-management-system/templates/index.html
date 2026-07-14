@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulse &middot; Hospital Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+<!-- =========================================================== LOGIN =========================================================== -->
+<div id="loginScreen">
+  <div class="loginHero">
+    <div class="brandMark"><span class="dot"></span> Pulse HMS</div>
+    <div>
+      <div class="pulseWrap">
+        <svg class="pulseLine" viewBox="0 0 600 90" preserveAspectRatio="none">
+          <path d="M0,45 L120,45 L145,10 L170,80 L195,45 L230,45 L250,25 L270,65 L290,45 L600,45"/>
+        </svg>
+      </div>
+      <div class="heroHeadline">Every heartbeat, tracked. Every patient, cared for.</div>
+      <div class="heroSub">One dashboard for admissions, appointments, billing and pharmacy — built so your front desk and your doctors are always looking at the same truth.</div>
+      <div class="heroStats">
+        <div class="heroStat"><b>4</b><span>Departments</span></div>
+        <div class="heroStat"><b>24/7</b><span>Reminder Engine</span></div>
+        <div class="heroStat"><b>100%</b><span>Local &amp; Private</span></div>
+      </div>
+    </div>
+    <div class="heroFoot">Seeded database build — data is stored securely in SQLite.</div>
+  </div>
+
+  <div class="loginPanel">
+    <div class="loginCard">
+      <h1>Welcome back</h1>
+      <p class="sub">Sign in to your Pulse HMS workspace.</p>
+      <div class="loginError" id="loginError">Invalid username or password. Try one of the logins below.</div>
+      <form id="loginForm">
+        <div class="field">
+          <label>Role</label>
+          <select id="loginRole">
+            <option value="admin">Administrator</option>
+            <option value="doctor">Doctor</option>
+            <option value="reception">Receptionist</option>
+            <option value="pharmacist">Pharmacist</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Username</label>
+          <input type="text" id="loginUser" placeholder="e.g. admin" autocomplete="username">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign in <i class="fa-solid fa-arrow-right"></i></button>
+      </form>
+      <div class="demoBox">
+        <b>admin / admin123</b> — full access<br>
+        <b>doctor / doctor123</b> — clinical view<br>
+        <b>reception / reception123</b> — front desk<br>
+        <b>pharmacist / pharmacy123</b> — pharmacy only
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================== APP =========================================================== -->
+<div id="app" class="hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="brandMark"><span class="dot"></span> Pulse HMS</div>
+
+    <div class="navGroupLabel">Overview</div>
+    <div class="navItem" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i>Dashboard</div>
+
+    <div class="navGroupLabel">Care</div>
+    <div class="navItem" data-page="patients"><i class="fa-solid fa-bed-pulse"></i>Patients</div>
+    <div class="navItem" data-page="doctors"><i class="fa-solid fa-user-doctor"></i>Doctors</div>
+    <div class="navItem" data-page="appointments"><i class="fa-solid fa-calendar-check"></i>Appointments <span class="badge" id="apptBadge">0</span></div>
+
+    <div class="navGroupLabel">Operations</div>
+    <div class="navItem" data-page="billing"><i class="fa-solid fa-file-invoice-dollar"></i>Billing</div>
+    <div class="navItem" data-page="pharmacy"><i class="fa-solid fa-pills"></i>Pharmacy</div>
+    <div class="navItem" data-page="reports"><i class="fa-solid fa-chart-line"></i>Reports</div>
+
+    <div class="navGroupLabel">System</div>
+    <div class="navItem" data-page="settings"><i class="fa-solid fa-gear"></i>Settings</div>
+    <div class="navItem" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i>Logout</div>
+
+    <div class="sidebarFoot">
+      <div class="userChip">
+        <div class="avatar" id="sideAvatar">A</div>
+        <div class="who"><b id="sideName">Admin User</b><span id="sideRole">administrator</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="mainWrap">
+    <div class="topbar">
+      <button class="menuToggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+      <div class="searchBox"><i class="fa-solid fa-magnifying-glass"></i><input id="globalSearch" placeholder="Search patients, doctors, invoices..."></div>
+      <div class="topbarRight">
+        <button class="iconBtn" id="themeToggle" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        <button class="iconBtn" id="notifBell" title="Notifications"><i class="fa-solid fa-bell"></i><span class="dotBadge hidden" id="notifCount">0</span></button>
+      </div>
+    </div>
+    <div class="content" id="content"><!-- page renders here --></div>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastStack"></div>
+
+<!-- Load application JavaScript -->
+<script src="/static/js/app.js"></script>
+</body>
+</html>

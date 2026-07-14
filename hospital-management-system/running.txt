@@ -1,0 +1,2 @@
+to run database:python init_db.py
+to run web:python app.py
